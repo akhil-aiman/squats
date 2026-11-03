@@ -7,7 +7,7 @@
 <title>Squats Challenge</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%92%AA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Figtree:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Gurmukhi:wght@400;600;700&display=swap">
 <style>
 /* Layout: sunny hero + tab bar (Board / Progress / Players), one column of panels below */
 :root{
@@ -50,7 +50,7 @@ p{margin:0}
   background:radial-gradient(circle at 90% 10%,rgba(255,255,255,.55) 0 54px,transparent 55px),linear-gradient(135deg,var(--sun) 0%,var(--peach) 55%,var(--accent) 100%)}
 .hero .eyebrow{color:var(--hero-ink);opacity:.75}
 /* tab bar */
-.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px;border-radius:16px;background:var(--surface);border:2px solid var(--line);box-shadow:0 6px 16px -10px rgba(42,18,54,.35)}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:5px;border-radius:16px;background:var(--surface);border:2px solid var(--line);box-shadow:0 6px 16px -10px rgba(42,18,54,.35)}
 .tabs a{display:grid;place-items:center;min-height:46px;border-radius:12px;font-weight:700;color:var(--muted);text-decoration:none}
 .tabs a[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
@@ -143,8 +143,32 @@ th:first-child,td:first-child{text-align:left}
 .pcard .pl b{color:var(--fg);font-variant-numeric:tabular-nums}
 .hist{display:grid;gap:2px;max-height:260px;overflow:auto;font-size:.92rem}
 .hist div{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dashed var(--line);font-variant-numeric:tabular-nums}
+/* guide: three languages, each paragraph tagged so the language picker can filter */
+:lang(hi){font-family:"Noto Sans Devanagari",var(--body)}
+:lang(pa){font-family:"Noto Sans Gurmukhi",var(--body)}
+.guide h3{font-family:var(--body);text-transform:none;font-size:1.15rem;font-weight:700;line-height:1.35;letter-spacing:0}
+.guide h3 .sep{color:var(--muted);font-weight:400;padding:0 .35em}
+.gtitle{font-size:1.25rem;font-weight:700;line-height:1.4}
+.gtitle .sep{color:var(--muted);font-weight:400;padding:0 .35em}
+.gsec{display:grid;gap:10px}
+.gsec p{max-width:65ch}
+.gnum{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--sun);color:var(--rank-ink);font-family:var(--display);font-weight:800;font-size:1.1rem;margin-right:8px;vertical-align:1px}
+.formula-box{background:var(--sun-soft);border:2px solid var(--sun);border-radius:12px;padding:12px 14px;display:grid;gap:4px}
+.formula-box .num{font-size:1.6rem}
+.warn{background:var(--accent-soft);border:2px solid var(--accent);border-radius:14px;padding:14px;display:grid;gap:8px}
+.langs .seg{flex-wrap:wrap}
+.guide.only-hi [lang]:not([lang="hi"]):not(.keep),.guide.only-pa [lang]:not([lang="pa"]):not(.keep),.guide.only-en [lang]:not([lang="en"]):not(.keep){display:none}
+.guide.only-hi .sep,.guide.only-pa .sep,.guide.only-en .sep{display:none}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.vcard{display:grid;gap:6px;min-width:0}
+.vbox{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:14px;overflow:hidden;background:var(--sunk);border:0;padding:0;min-height:0;width:100%}
+.vbox img{width:100%;height:100%;object-fit:cover;display:block}
+.vbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vbox .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.vbox .play::after{content:"";margin-left:5px;border-left:18px solid var(--accent-ink);border-top:11px solid transparent;border-bottom:11px solid transparent}
 [hidden]{display:none!important}
 @media (max-width:560px){
+  .tabs a{font-size:.92rem}
   .prow{grid-template-columns:34px minmax(0,1fr) auto;gap:10px}
   .prow .sparkcell{display:none}
   .stat .num{font-size:1.45rem}
@@ -157,7 +181,7 @@ th:first-child,td:first-child{text-align:left}
 <body>
 <div class="wrap">
   <header class="hero">
-    <span class="eyebrow">Live leaderboard</span>
+    <span class="eyebrow"><span lang="hi">स्क्वाट्स चैलेंज</span> · <span lang="pa">ਸਕੁਆਟਸ ਚੈਲੰਜ</span></span>
     <h1>Squats Challenge</h1>
     <p>Tap your name, type your squats, and you're on the board.</p>
   </header>
@@ -166,6 +190,7 @@ th:first-child,td:first-child{text-align:left}
     <a href="#board" data-tab="board">Board</a>
     <a href="#progress" data-tab="progress">Progress</a>
     <a href="#players" data-tab="players">Players</a>
+    <a href="#guide" data-tab="guide">Guide</a>
   </nav>
 
   <div id="status" class="note" hidden></div>
@@ -316,6 +341,61 @@ th:first-child,td:first-child{text-align:left}
     <section class="panel">
       <h3>History</h3>
       <div class="hist" id="ppHist"></div>
+    </section>
+  </main>
+
+  <!-- ===== GUIDE ===== -->
+  <main id="view-guide" class="wrap guide" style="padding:0;gap:18px" hidden>
+    <section class="panel">
+      <div class="gtitle">💪 <span lang="hi">स्क्वाट्स चैलेंज</span><span class="sep">|</span><span lang="pa">ਸਕੁਆਟਸ ਚੈਲੰਜ</span><span class="sep">|</span><span lang="en">Squats Challenge</span></div>
+      <div class="row langs" style="align-items:center">
+        <div class="seg" role="group" aria-label="Language" id="langSeg">
+          <button type="button" data-l="all" aria-pressed="true">All</button>
+          <button type="button" data-l="hi" aria-pressed="false" lang="hi" class="keep">हिंदी</button>
+          <button type="button" data-l="pa" aria-pressed="false" lang="pa" class="keep">ਪੰਜਾਬੀ</button>
+          <button type="button" data-l="en" aria-pressed="false" lang="en" class="keep">English</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel gsec">
+      <h3><span class="gnum">1</span><span lang="hi">रिकॉर्ड कैसे लिखें</span><span class="sep">|</span><span lang="pa">ਰਿਕਾਰਡ ਕਿਵੇਂ ਲਿਖਣਾ ਹੈ</span><span class="sep">|</span><span lang="en">How to Record</span></h3>
+      <div class="formula-box">
+        <p lang="hi">अब तक के कुल स्क्वाट्स / कुल दिनों की संख्या</p>
+        <p lang="pa">ਹੁਣ ਤੱਕ ਦੇ ਕੁੱਲ ਸਕੁਆਟਸ / ਕੁੱਲ ਦਿਨਾਂ ਦੀ ਗਿਣਤੀ</p>
+        <p lang="en">Total squats so far / total number of days</p>
+        <p class="keep"><span class="eyebrow">Example</span><br><span class="num">100 Squats / 5 Days</span></p>
+      </div>
+    </section>
+
+    <section class="panel gsec">
+      <h3><span class="gnum">2</span><span lang="hi">इसका क्या फायदा है?</span><span class="sep">|</span><span lang="pa">ਇਸ ਦਾ ਕੀ ਫਾਇਦਾ ਹੈ?</span><span class="sep">|</span><span lang="en">Why Does It Matter?</span></h3>
+      <p lang="hi">इससे हमें पता चलेगा कि आप हर दिन औसतन कितने स्क्वाट्स कर रहे हैं। अगर यह संख्या धीरे-धीरे बढ़ती है, तो यह आपकी टांगों की ताकत और सहनशक्ति में सुधार का संकेत हो सकता है। 💪</p>
+      <p lang="pa">ਇਸ ਨਾਲ ਸਾਨੂੰ ਪਤਾ ਲੱਗੇਗਾ ਕਿ ਤੁਸੀਂ ਹਰ ਰੋਜ਼ ਔਸਤਨ ਕਿੰਨੇ ਸਕੁਆਟਸ ਕਰ ਰਹੇ ਹੋ। ਜੇ ਇਹ ਗਿਣਤੀ ਹੌਲੀ-ਹੌਲੀ ਵਧਦੀ ਹੈ, ਤਾਂ ਇਹ ਤੁਹਾਡੀਆਂ ਲੱਤਾਂ ਦੀ ਤਾਕਤ ਅਤੇ ਸਹਿਣਸ਼ਕਤੀ ਵਿੱਚ ਸੁਧਾਰ ਦਾ ਸੰਕੇਤ ਹੋ ਸਕਦਾ ਹੈ।</p>
+      <p lang="en">This helps us track your average squats per day. If the average gradually increases, it may indicate improved leg strength and endurance.</p>
+    </section>
+
+    <section class="panel gsec">
+      <h3><span class="gnum">3</span><span lang="hi">आराम भी ज़रूरी है</span><span class="sep">|</span><span lang="pa">ਆਰਾਮ ਵੀ ਜ਼ਰੂਰੀ ਹੈ</span><span class="sep">|</span><span lang="en">Rest Is Important</span></h3>
+      <p lang="hi">अगर स्क्वाट्स करने के बाद मांसपेशियों में दर्द हो, तो 1–2 दिन आराम करें और प्रोटीन वाला खाना खाएँ। इससे मांसपेशियों को ठीक होने और मजबूत बनने में मदद मिलती है।</p>
+      <p lang="pa">ਜੇ ਸਕੁਆਟਸ ਕਰਨ ਤੋਂ ਬਾਅਦ ਮਾਸਪੇਸ਼ੀਆਂ ਵਿੱਚ ਦਰਦ ਹੋਵੇ, ਤਾਂ 1–2 ਦਿਨ ਆਰਾਮ ਕਰੋ ਅਤੇ ਪ੍ਰੋਟੀਨ ਵਾਲਾ ਖਾਣਾ ਖਾਓ। ਇਸ ਨਾਲ ਮਾਸਪੇਸ਼ੀਆਂ ਨੂੰ ਠੀਕ ਹੋਣ ਅਤੇ ਮਜ਼ਬੂਤ ਬਣਨ ਵਿੱਚ ਮਦਦ ਮਿਲਦੀ ਹੈ।</p>
+      <p lang="en">If your muscles are sore after squats, take 1–2 days of rest and eat protein-rich foods to support muscle recovery.</p>
+      <div class="warn">
+        <h3>⚠️ <span lang="hi">याद रखें</span><span class="sep">|</span><span lang="pa">ਯਾਦ ਰੱਖੋ</span><span class="sep">|</span><span lang="en">Remember</span></h3>
+        <p lang="hi">आराम करना भी मांसपेशियों को मजबूत बनाने का हिस्सा है। शरीर को आराम दें और फिर दोबारा व्यायाम शुरू करें। तेज़ दर्द या जोड़ों में दर्द होने पर व्यायाम रोक दें।</p>
+        <p lang="pa">ਆਰਾਮ ਕਰਨਾ ਵੀ ਮਾਸਪੇਸ਼ੀਆਂ ਨੂੰ ਮਜ਼ਬੂਤ ਬਣਾਉਣ ਦਾ ਹਿੱਸਾ ਹੈ। ਸਰੀਰ ਨੂੰ ਆਰਾਮ ਦਿਓ ਅਤੇ ਫਿਰ ਦੁਬਾਰਾ ਕਸਰਤ ਸ਼ੁਰੂ ਕਰੋ। ਜੇ ਤੇਜ਼ ਦਰਦ ਹੋਵੇ ਜਾਂ ਜੋੜਾਂ ਵਿੱਚ ਦਰਦ ਹੋਵੇ, ਤਾਂ ਕਸਰਤ ਰੋਕ ਦਿਓ।</p>
+        <p lang="en">Rest is essential for muscle growth! Exercise, recover, and then get back to it. Don't ignore your body's signals.</p>
+      </div>
+    </section>
+
+    <section class="panel gsec">
+      <h3><span class="gnum">4</span><span lang="hi">स्क्वाट्स करना सीखें</span><span class="sep">|</span><span lang="pa">ਸਕੁਆਟਸ ਕਰਨਾ ਸਿੱਖੋ</span><span class="sep">|</span><span lang="en">Learn the Correct Technique</span></h3>
+      <p class="muted keep">🎥 Sample videos · tap to play</p>
+      <div class="videos" id="videos">
+        <div class="vcard" data-yt="eFEVKmp3M4g"></div>
+        <div class="vcard" data-yt="rBU3cQWV4mI"></div>
+        <div class="vcard" data-yt="Qj0UtfzpWGM"></div>
+      </div>
     </section>
   </main>
 </div>
@@ -594,13 +674,13 @@ th:first-child,td:first-child{text-align:left}
   function currentView(){
     var h = decodeURIComponent((location.hash || "").replace(/^#/,""));
     if (h.indexOf("player/") === 0) return {v:"player", name:h.slice(7)};
-    if (h === "progress" || h === "players") return {v:h};
+    if (h === "progress" || h === "players" || h === "guide") return {v:h};
     return {v:"board"};
   }
   function render(){
     if (loaded) derive();
     var cv = currentView();
-    ["board","progress","players","player"].forEach(function(v){ $("view-"+v).hidden = v !== cv.v; });
+    ["board","progress","players","player","guide"].forEach(function(v){ $("view-"+v).hidden = v !== cv.v; });
     document.querySelectorAll(".tabs a").forEach(function(a){
       var on = a.getAttribute("data-tab") === (cv.v === "player" ? "players" : cv.v);
       if (on) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
@@ -853,6 +933,29 @@ th:first-child,td:first-child{text-align:left}
   document.querySelectorAll("#lineMode button").forEach(function(b){ b.addEventListener("click", function(){
     lineMode = b.getAttribute("data-m"); sset("squats-line", lineMode); renderProgress();
   }); });
+
+  // ---------- guide: videos load only when tapped ----------
+  document.querySelectorAll("#videos [data-yt]").forEach(function(card, i){
+    var id = card.getAttribute("data-yt");
+    var btn = el("button",{type:"button",class:"vbox","aria-label":"Play squat video "+(i+1)},[
+      el("img",{src:"https://i.ytimg.com/vi/"+id+"/hqdefault.jpg",alt:"",loading:"lazy",onerror:"this.remove()"}), el("span",{class:"play"})
+    ]);
+    btn.onclick = function(){
+      var box = el("div",{class:"vbox"});
+      box.appendChild(el("iframe",{src:"https://www.youtube-nocookie.com/embed/"+id+"?autoplay=1&playsinline=1&rel=0",title:"Squat video "+(i+1),allow:"autoplay; encrypted-media; picture-in-picture",allowfullscreen:""}));
+      card.replaceChild(box, btn);
+    };
+    card.appendChild(btn);
+    card.appendChild(el("a",{class:"link",href:"https://youtube.com/shorts/"+id,target:"_blank",rel:"noopener",text:"YouTube ↗"}));
+  });
+  function setLang(l){
+    var g = $("view-guide"); g.classList.remove("only-hi","only-pa","only-en");
+    if (l !== "all") g.classList.add("only-"+l);
+    document.querySelectorAll("#langSeg button").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-l") === l)); });
+    sset("squats-lang", l);
+  }
+  document.querySelectorAll("#langSeg button").forEach(function(b){ b.addEventListener("click", function(){ setLang(b.getAttribute("data-l")); }); });
+  setLang(["hi","pa","en"].indexOf(sget("squats-lang")) >= 0 ? sget("squats-lang") : "all");
 
   // ---------- load & keep fresh ----------
   function refresh(){
