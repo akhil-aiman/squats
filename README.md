@@ -1,0 +1,2 @@
+# squats
+Squats Challenge
